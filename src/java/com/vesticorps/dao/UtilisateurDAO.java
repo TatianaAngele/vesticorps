@@ -2,13 +2,20 @@ package com.vesticorps.dao;
 
 import java.sql.*;
 import com.vesticorps.beans.Utilisateur;
+import com.vesticorps.bdd.BaseDeDonnees; 
 
 public class UtilisateurDAO {
 
     private Connection connection;
 
-    public UtilisateurDAO(Connection connection) {
-        this.connection = connection;
+    public UtilisateurDAO() {
+        try {
+            BaseDeDonnees bdd = new BaseDeDonnees();
+            this.connection = bdd.getConnection();
+        }
+        catch(SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /* ================================

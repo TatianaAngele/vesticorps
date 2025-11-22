@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="m-2">
-                    <form>
+                    <form method="POST" action="${pageContext.request.contextPath}/creer_compte">
                         <div class="flex flex-col">
                             <label>Nom</label>
                             <input type="text" name="nom" placeholder="Nom de famille" class="border p-2 mt-1 outline-none" required />
@@ -75,7 +75,9 @@
                         </div>
 
                         <div>
-                            <input type="submit" value="Créer mon compte" class="w-full p-2 bg-[#bce354] mt-4" />
+                            <button type="submit" class="w-full p-2 bg-[#bce354] mt-4">
+                                Créer mon compte
+                            </button>
                         </div>
                     </form>
                 </div>

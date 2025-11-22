@@ -13,6 +13,14 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     
+    <!-- Forcer l'encodage UTF-8 sur toutes les JSP -->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+    
     <!-- Servlet pour l'authentification -->
     <servlet>
         <servlet-name>AuthentificationServlet</servlet-name>
