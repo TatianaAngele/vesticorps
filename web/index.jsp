@@ -18,7 +18,7 @@
 
             <div>
                 <ul class="flex space-x-[16px]">
-                    <li><a> <i class="fa fa-user"></i> Se connecter</a></li>
+                    <li><a href="${pageContext.request.contextPath}/auth"> <i class="fa fa-user"></i> Se connecter</a></li>
                     <li><a> <i class="fa fa-user-plus"></i> Créer un compte</a></li>
                 </ul>
             </div>
@@ -109,7 +109,7 @@
                 
                 <div class="mt-4 flex justify-center space-x-8">
                     <a class="bg-white p-2 text-black rounded rounded-lg"> <i class="fa fa-user-plus"></i> Créer un compte</a>
-                    <a class="bg-white p-2 text-black rounded rounded-lg"> <i class="fa fa-user"></i> Se connecter</a>
+                    <a href="${pageContext.request.contextPath}/auth" class="bg-white p-2 text-black rounded rounded-lg"> <i class="fa fa-user"></i> Se connecter</a>
                 </div>
             </div>
             

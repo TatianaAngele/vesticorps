@@ -13,6 +13,14 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     
-    
+    <!-- Servlet pour l'authentification -->
+    <servlet>
+        <servlet-name>AuthentificationServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.AuthentificationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthentificationServlet</servlet-name>
+        <url-pattern>/auth</url-pattern>
+    </servlet-mapping>
     
 </web-app>
