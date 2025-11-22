@@ -23,4 +23,13 @@
         <url-pattern>/auth</url-pattern>
     </servlet-mapping>
     
+    <!-- Servlet pour la création d'un compte -->
+    <servlet>
+        <servlet-name>CreerCompteServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.CreerCompteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreerCompteServlet</servlet-name>
+        <url-pattern>/creer_compte</url-pattern>
+    </servlet-mapping>
 </web-app>

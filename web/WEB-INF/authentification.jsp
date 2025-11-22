@@ -16,19 +16,19 @@
     <body class="h-screen flex flex-col">
         <header class="w-full flex justify-between p-4 bg-[#bce354]">
             <div>
-                <h1 class="font-black"> <i class="fa-solid fa-shirt"></i> VESTICORPS</h1>
+                <a href="${pageContext.request.contextPath}/"><h1 class="font-black"> <i class="fa-solid fa-shirt"></i> VESTICORPS</h1></a>
             </div>
 
             <div>
                 <ul class="flex space-x-[16px]">
-                    <li><a> <i class="fa fa-user"></i> Se connecter</a></li>
-                    <li><a> <i class="fa fa-user-plus"></i> Créer un compte</a></li>
+                    <li><a class="#"> <i class="fa fa-user"></i> Se connecter</a></li>
+                    <li><a href="${pageContext.request.contextPath}/creer_compte"> <i class="fa fa-user-plus"></i> Créer un compte</a></li>
                 </ul>
             </div>
         </header>
         
         <div class="grow flex justify-center items-center">
-            <div class="w-11/12 border border-solid border-[#e9e6e1] h-fit p-8">
+            <div class="w-11/12 sm:w-[480px] border border-solid border-[#e9e6e1] h-fit p-8">
                 <div>
                     <h1 class="text-4xl text-center font-bold">Connexion</h1>
                     <p class="text-center text-[#7e83b0] mt-4">Connectez-vous à votre compte</p>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="mt-4">
-                    <p class="text-center">Pas encore de compte ? <a class="hover:text-green-800 hover:underline hover:cursor-pointer">Créer un compte</a></p>
+                    <p class="text-center">Pas encore de compte ? <a href="${pageContext.request.contextPath}/creer_compte" class="hover:text-green-800 hover:underline hover:cursor-pointer">Créer un compte</a></p>
                 </div>
             </div>
         </div>
