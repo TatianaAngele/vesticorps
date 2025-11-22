@@ -1,0 +1,4 @@
+build/
+nbproject/
+node_modules/
+web/vendor/*
