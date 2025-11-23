@@ -4,6 +4,7 @@
     Author     : HP
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,7 +36,18 @@
                 </div>
 
                 <div class="m-2">
-                    <form>
+                    
+                    <%-- Message d'erreur (echec d'authentification) --%>
+                    <c:if test="${sessionScope.etatAuthentification == 'echec'}">
+                        <div class="p-2 mb-2 bg-red-500 rounded rounded-lg">
+                            <p class="text-center text-white"> <i class="fa-solid fa-triangle-exclamation"></i> Vérifiez votre email et votre mot de passe.</p>
+                        </div>
+                        
+                        <c:remove var="etatAuthentification" scope="session" />
+                    </c:if>
+                    
+                    
+                    <form method="POST" action="${pageContext.request.contextPath}/auth">
                         <div class="flex flex-col">
                             <label>Email</label>
                             <input type="text" name="email" placeholder="Adresse email" class="border p-2 mt-1 outline-none" required />
@@ -43,11 +55,13 @@
 
                         <div class="flex flex-col mt-4">
                             <label>Mot de passe</label>
-                            <input type="password" name="password" placeholder="Mot de passe" class="border p-2 mt-1 outline-none" required />
+                            <input type="password" name="mot_de_passe" placeholder="Mot de passe" class="border p-2 mt-1 outline-none" required />
                         </div>
 
                         <div>
-                            <input type="submit" value="Se connecter" class="w-full p-2 bg-[#bce354] mt-4" />
+                            <button type="submit" class="w-full p-2 bg-[#bce354] mt-4">
+                                Se connecter
+                            </button>
                         </div>
                     </form>
                 </div>
