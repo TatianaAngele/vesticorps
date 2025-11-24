@@ -3,6 +3,7 @@
 */
 package com.vesticorps.servlets;
 
+import com.vesticorps.beans.Utilisateur;
 import com.vesticorps.dao.UtilisateurDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -23,11 +24,20 @@ public class AuthentificationServlet extends HttpServlet {
         String motDePasse = request.getParameter("mot_de_passe");
         
         UtilisateurDAO utilisateurDAO = new UtilisateurDAO(); 
-        if(utilisateurDAO.connecterUtilisateur(email, motDePasse) != null) {
-            // Redirection ...  
+        Utilisateur utilisateur = utilisateurDAO.connecterUtilisateur(email, motDePasse);
+        HttpSession session = request.getSession();
+        
+        if(utilisateur != null) {
+            session.setAttribute("utilisateur", utilisateur);
+            
+            // Redirection 
+            if (utilisateur.getRole_utilisateur().equals("vendeur")) {
+                response.sendRedirect("/vesticorps/vendeur/proudit");
+            } else if (utilisateur.getRole_utilisateur().equals("client")) {
+                response.sendRedirect("/vesticorps/client/produit");
+            }
         }
         else {
-            HttpSession session = request.getSession();
             session.setAttribute("etatAuthentification", "echec");
             response.sendRedirect("/vesticorps/auth");
         }

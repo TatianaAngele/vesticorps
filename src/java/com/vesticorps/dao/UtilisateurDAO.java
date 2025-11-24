@@ -22,21 +22,59 @@ public class UtilisateurDAO {
        1. CREER UTILISATEUR
        ================================ */
     public boolean creerUtilisateur(Utilisateur utilisateur) {
-        String sql = "INSERT INTO utilisateur "
+
+        String sqlUser = "INSERT INTO utilisateur "
                 + "(nom, prenom, email, mot_de_passe, role_utilisateur, telephone, adresse) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+        try (
+            PreparedStatement psUser = connection.prepareStatement(sqlUser, Statement.RETURN_GENERATED_KEYS);
+        ) {
 
-            ps.setString(1, utilisateur.getNom());
-            ps.setString(2, utilisateur.getPrenom());
-            ps.setString(3, utilisateur.getEmail());
-            ps.setString(4, utilisateur.getMot_de_passe());
-            ps.setString(5, utilisateur.getRole_utilisateur());
-            ps.setString(6, utilisateur.getTelephone());
-            ps.setString(7, utilisateur.getAdresse());
+            psUser.setString(1, utilisateur.getNom());
+            psUser.setString(2, utilisateur.getPrenom());
+            psUser.setString(3, utilisateur.getEmail());
+            psUser.setString(4, utilisateur.getMot_de_passe());
+            psUser.setString(5, utilisateur.getRole_utilisateur());
+            psUser.setString(6, utilisateur.getTelephone());
+            psUser.setString(7, utilisateur.getAdresse());
 
-            return ps.executeUpdate() > 0;
+            int rows = psUser.executeUpdate();
+            if (rows == 0) return false;
+
+            ResultSet rs = psUser.getGeneratedKeys();
+            long generatedId = 0;
+
+            if (rs.next()) {
+                generatedId = rs.getLong(1);
+                utilisateur.setId_utilisateur(generatedId); 
+            } else {
+                return false;
+            }
+
+            /* ===========================================================
+               INSERTION SELON LE TYPE DE COMPTE
+            =========================================================== */
+
+            if (utilisateur.getRole_utilisateur().equalsIgnoreCase("client")) {
+                String sqlClient = "INSERT INTO client (id_utilisateur, point_fidelite) VALUES (?, 0)";
+
+                try (PreparedStatement psClient = connection.prepareStatement(sqlClient)) {
+                    psClient.setLong(1, generatedId);
+                    return psClient.executeUpdate() > 0;
+                }
+
+            } else if (utilisateur.getRole_utilisateur().equalsIgnoreCase("vendeur")) {
+                String sqlVendeur = "INSERT INTO vendeur (id_utilisateur, statut_vendeur) VALUES (?, 'actif')";
+
+                try (PreparedStatement psVendeur = connection.prepareStatement(sqlVendeur)) {
+                    psVendeur.setLong(1, generatedId);
+                    return psVendeur.executeUpdate() > 0;
+                }
+            }
+
+            // Si rôle invalide
+            return false;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -44,7 +82,7 @@ public class UtilisateurDAO {
         }
     }
 
-
+    
     /* ================================
        2. MODIFIER UTILISATEUR
        ================================ */

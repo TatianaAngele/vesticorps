@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         version="3.0">
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee           http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <session-config>
         <session-timeout>
             30
@@ -12,7 +8,6 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
     <!-- Forcer l'encodage UTF-8 sur toutes les JSP -->
     <jsp-config>
         <jsp-property-group>
@@ -20,7 +15,6 @@
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
-    
     <!-- Servlet pour l'authentification -->
     <servlet>
         <servlet-name>AuthentificationServlet</servlet-name>
@@ -30,7 +24,6 @@
         <servlet-name>AuthentificationServlet</servlet-name>
         <url-pattern>/auth</url-pattern>
     </servlet-mapping>
-    
     <!-- Servlet pour la création d'un compte -->
     <servlet>
         <servlet-name>CreerCompteServlet</servlet-name>
@@ -39,5 +32,25 @@
     <servlet-mapping>
         <servlet-name>CreerCompteServlet</servlet-name>
         <url-pattern>/creer_compte</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet pour la liste de produit du vendeur -->
+    <servlet>
+        <servlet-name>ProduitServletVendeur</servlet-name>
+        <servlet-class>com.vesticorps.servlets.vendeur.ProduitServletVendeur</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProduitServletVendeur</servlet-name>
+        <url-pattern>/vendeur/proudit</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet pour la liste de produit du vendeur -->
+    <servlet>
+        <servlet-name>ProduitServletClient</servlet-name>
+        <servlet-class>com.vesticorps.servlets.client.ProduitServletClient</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProduitServletClient</servlet-name>
+        <url-pattern>/client/produit</url-pattern>
     </servlet-mapping>
 </web-app>
