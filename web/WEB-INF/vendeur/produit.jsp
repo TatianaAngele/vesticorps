@@ -16,11 +16,11 @@
 
             <div>
                 <ul class="flex space-x-[16px]">
-                    <li><a href="${pageContext.request.contextPath}/auth"> <i class="fa fa-store"></i> Produits</a></li>
-                    <li><a href="${pageContext.request.contextPath}/auth"> <i class="fa fa-cart-shopping"></i> Commandes</a></li>
-                    <li><a href="${pageContext.request.contextPath}/auth"> <i class="fa fa-chart-line"></i> Statistiques</a></li>
+                    <li><a href="${pageContext.request.contextPath}/vendeur/produits"> <i class="fa fa-store"></i> Produits</a></li>
+                    <li><a href="${pageContext.request.contextPath}/vendeur/commandes"> <i class="fa fa-cart-shopping"></i> Commandes</a></li>
+                    <li><a href="${pageContext.request.contextPath}/vendeur/statistique"> <i class="fa fa-chart-line"></i> Statistique</a></li>
                     <li>
-                        <a href="${pageContext.request.contextPath}/auth">
+                        <a href="${pageContext.request.contextPath}/logout">
                             <i class="fa fa-right-from-bracket"></i> 
                             Déconnexion 
                         </a>

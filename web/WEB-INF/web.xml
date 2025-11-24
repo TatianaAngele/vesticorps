@@ -8,6 +8,7 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
     <!-- Forcer l'encodage UTF-8 sur toutes les JSP -->
     <jsp-config>
         <jsp-property-group>
@@ -15,6 +16,7 @@
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
+    
     <!-- Servlet pour l'authentification -->
     <servlet>
         <servlet-name>AuthentificationServlet</servlet-name>
@@ -24,6 +26,7 @@
         <servlet-name>AuthentificationServlet</servlet-name>
         <url-pattern>/auth</url-pattern>
     </servlet-mapping>
+    
     <!-- Servlet pour la création d'un compte -->
     <servlet>
         <servlet-name>CreerCompteServlet</servlet-name>
@@ -53,4 +56,15 @@
         <servlet-name>ProduitServletClient</servlet-name>
         <url-pattern>/client/produit</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet de deconnexion --> 
+    <servlet>
+        <servlet-name>DeconnexionServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.DeconnexionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeconnexionServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
