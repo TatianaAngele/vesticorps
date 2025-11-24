@@ -2,3 +2,4 @@ build/
 nbproject/
 node_modules/
 web/vendor/*
+package-lock.json

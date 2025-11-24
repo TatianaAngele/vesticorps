@@ -16,7 +16,7 @@
 
             <div>
                 <ul class="flex space-x-[16px]">
-                    <li><a href="${pageContext.request.contextPath}/vendeur/produits"> <i class="fa fa-store"></i> Produits</a></li>
+                    <li><a href="${pageContext.request.contextPath}/vendeur/produit"> <i class="fa fa-store"></i> Produits</a></li>
                     <li><a href="${pageContext.request.contextPath}/vendeur/commandes"> <i class="fa fa-cart-shopping"></i> Commandes</a></li>
                     <li><a href="${pageContext.request.contextPath}/vendeur/statistique"> <i class="fa fa-chart-line"></i> Statistique</a></li>
                     <li>
@@ -41,6 +41,12 @@
             <div>
                 <h2 class="text-2xl text-center">Mes produits</h2>
                 
+                <div class="flex justify-end mr-4">
+                    <a href="${pageContext.request.contextPath}/vendeur/ajouterProduit" class="p-2 bg-[#bce354] rounded-lg">
+                        <i class="fa fa-plus"></i> Ajouter un produit
+                    </a>
+                </div>
+                        
                 
             </div>
         </main>

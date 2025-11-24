@@ -32,7 +32,7 @@ public class AuthentificationServlet extends HttpServlet {
             
             // Redirection 
             if (utilisateur.getRole_utilisateur().equals("vendeur")) {
-                response.sendRedirect("/vesticorps/vendeur/proudit");
+                response.sendRedirect("/vesticorps/vendeur/produit");
             } else if (utilisateur.getRole_utilisateur().equals("client")) {
                 response.sendRedirect("/vesticorps/client/produit");
             }

@@ -36,7 +36,7 @@
         <servlet-name>CreerCompteServlet</servlet-name>
         <url-pattern>/creer_compte</url-pattern>
     </servlet-mapping>
-
+    
     <!-- Servlet pour la liste de produit du vendeur -->
     <servlet>
         <servlet-name>ProduitServletVendeur</servlet-name>
@@ -44,9 +44,9 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>ProduitServletVendeur</servlet-name>
-        <url-pattern>/vendeur/proudit</url-pattern>
+        <url-pattern>/vendeur/produit</url-pattern>
     </servlet-mapping>
-
+    
     <!-- Servlet pour la liste de produit du vendeur -->
     <servlet>
         <servlet-name>ProduitServletClient</servlet-name>
@@ -55,6 +55,16 @@
     <servlet-mapping>
         <servlet-name>ProduitServletClient</servlet-name>
         <url-pattern>/client/produit</url-pattern>
+    </servlet-mapping>
+    
+     <!-- Servlet pour ajouter un produit --> 
+    <servlet>
+        <servlet-name>AjouterProduitServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.vendeur.AjouterProduit</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AjouterProduitServlet</servlet-name>
+        <url-pattern>/vendeur/ajouterProduit</url-pattern>
     </servlet-mapping>
     
     <!-- Servlet de deconnexion --> 
