@@ -43,7 +43,7 @@
                 
                 <div class="grow flex justify-center items-center mt-8 mb-8">
                     <div class="w-11/12 sm:w-[480px] border border-solid border-[#e9e6e1] h-fit p-8 rounded rounded-lg">
-                        <form class="">
+                        <form method="POST" enctype="multipart/form-data" action="${pageContext.request.contextPath}/vendeur/ajouterProduit">
                             <div class="flex flex-col">
                                 <label>
                                     
