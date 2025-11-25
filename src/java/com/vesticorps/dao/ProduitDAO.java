@@ -5,6 +5,9 @@ import com.vesticorps.beans.Produit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet; 
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProduitDAO {
 
@@ -43,5 +46,43 @@ public class ProduitDAO {
             e.printStackTrace();
             return false;
         }
+    }
+    
+     /**
+     * Récupère la liste des produits appartenant à un vendeur
+     */
+    public List<Produit> getProduitsByVendeur(int idUtilisateur) {
+
+        List<Produit> liste = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM produit WHERE id_utilisateur = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, idUtilisateur);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Produit p = new Produit();
+
+                p.setId_produit(rs.getInt("id_produit"));
+                p.setNom_produit(rs.getString("nom_produit"));
+                p.setPhoto(rs.getString("photo"));
+                p.setDescription(rs.getString("description"));
+                p.setPrix_unitaire(rs.getInt("prix_unitaire"));
+                p.setQuantite_stock(rs.getInt("quantite_stock"));
+                p.setId_utilisateur(rs.getInt("id_utilisateur"));
+
+                liste.add(p);
+            }
+
+            rs.close();
+            ps.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return liste;
     }
 }

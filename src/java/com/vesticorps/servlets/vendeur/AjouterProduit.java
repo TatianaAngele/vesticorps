@@ -34,7 +34,7 @@ public class AjouterProduit extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("utilisateur") == null) {
@@ -53,10 +53,19 @@ public class AjouterProduit extends HttpServlet {
         Part partPhoto = request.getPart("photo");
 
         // Récupération du nom du fichier
-        String fileName = getFileName(partPhoto);
-        if (fileName == null || fileName.trim().isEmpty()) {
-            fileName = "default.png";
+        String originalName = getFileName(partPhoto);
+        if (originalName == null || originalName.trim().isEmpty()) {
+            originalName = "default.png";
         }
+
+        String extension = "";
+        int lastDot = originalName.lastIndexOf(".");
+        if (lastDot > 0) {
+            extension = originalName.substring(lastDot);
+        }
+
+        String baseName = (lastDot > 0) ? originalName.substring(0, lastDot) : originalName;
+        String fileName = baseName + "_" + System.currentTimeMillis() + extension;
 
         // Dossier d’upload local
         String uploadPath = getServletContext().getRealPath("/uploads");
@@ -67,14 +76,14 @@ public class AjouterProduit extends HttpServlet {
         // Enregistrement du fichier
         String filePath = uploadPath + File.separator + fileName;
         partPhoto.write(filePath);
-        
-        Produit produit = new Produit(); 
+
+        Produit produit = new Produit();
         produit.setId_utilisateur(utilisateur.getId_utilisateur());
         produit.setNom_produit(request.getParameter("nom_produit"));
         produit.setDescription(request.getParameter("description"));
         produit.setPrix_unitaire(Integer.parseInt(request.getParameter("prix_unitaire")));
         produit.setQuantite_stock(Integer.parseInt(request.getParameter("quantite_stock")));
-        produit.setPhoto(filePath);
+        produit.setPhoto(fileName);
 
         // Enregistrer en BDD
         ProduitDAO produitDAO = new ProduitDAO();
@@ -83,6 +92,7 @@ public class AjouterProduit extends HttpServlet {
         // Redirection vers la liste des produits
         response.sendRedirect(request.getContextPath() + "/vendeur/produit");
     }
+
 
     /**
      * Permet de récupérer uniquement le nom du fichier envoyé

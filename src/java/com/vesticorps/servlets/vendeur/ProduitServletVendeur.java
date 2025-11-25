@@ -1,6 +1,11 @@
 package com.vesticorps.servlets.vendeur;
 
+import com.vesticorps.beans.Produit;
+import com.vesticorps.beans.Utilisateur;
+import com.vesticorps.dao.ProduitDAO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +21,11 @@ public class ProduitServletVendeur extends HttpServlet {
             response.sendRedirect("/vesticorps/auth");
             return;
         }
+        
+        Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur"); 
+        ProduitDAO produitDAO = new ProduitDAO(); 
+        List<Produit> produits = produitDAO.getProduitsByVendeur( (int) utilisateur.getId_utilisateur());
+        request.setAttribute("produits", produits);
         
         this.getServletContext().getRequestDispatcher("/WEB-INF/vendeur/produit.jsp").forward(request, response);
     }
