@@ -46,8 +46,7 @@
                         <i class="fa fa-plus"></i> Ajouter un produit
                     </a>
                 </div>
-                        
-                        
+                                    
                 <div class="mt-[32px] grid grid-cols-1 justify-items-center gap-y-[80px] md:grid-cols-2 xl:grid-cols-3">
                     <c:forEach var="produit" items="${produits}">
                         <div class="w-[350px] rounded overflow-hidden shadow-lg">
@@ -63,13 +62,12 @@
                                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Qté en stock : <c:out value="${produit.quantite_stock}" /> </span>
                             </div>
                             <div class="flex justify-center gap-x-2 pb-4">
-                                <a class="p-2 bg-[#bce354] rounded rounded-lg"> <i class="fa fa-pen"></i>  Modifier</a>
+                                <a href="${pageContext.request.contextPath}/vendeur/produit/modifier?id_produit=${produit.id_produit}" class="p-2 bg-[#bce354] rounded rounded-lg"> <i class="fa fa-pen"></i>  Modifier</a>
                                 <a class="p-2 bg-red-500 rounded rounded-lg"> <i class="fa fa-trash"></i>  Supprimer</a>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
-            </div>
         </main>
     </body>
 </html>

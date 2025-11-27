@@ -48,7 +48,7 @@ public class ProduitDAO {
         }
     }
     
-     /**
+    /**
      * Récupère la liste des produits appartenant à un vendeur
      */
     public List<Produit> getProduitsByVendeur(int idUtilisateur) {
@@ -85,4 +85,68 @@ public class ProduitDAO {
 
         return liste;
     }
+    
+    /*
+        Récuperer un produit par son id 
+    */
+    public Produit getProduitById(long idProduit) {
+
+        Produit p = null;
+
+        try {
+            String sql = "SELECT * FROM produit WHERE id_produit = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, idProduit);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                p = new Produit();
+                p.setId_produit(rs.getLong("id_produit"));
+                p.setId_utilisateur(rs.getLong("id_utilisateur"));
+                p.setNom_produit(rs.getString("nom_produit"));
+                p.setPhoto(rs.getString("photo"));
+                p.setDescription(rs.getString("description"));
+                p.setPrix_unitaire(rs.getInt("prix_unitaire"));
+                p.setQuantite_stock(rs.getInt("quantite_stock"));
+            }
+
+            rs.close();
+            ps.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return p;
+    }
+    
+    /*
+        Pour modifier un produit 
+    */
+    public boolean updateProduit(Produit produit) {
+
+        String sql = "UPDATE produit SET id_utilisateur = ?, nom_produit = ?, "
+                   + "description = ?, prix_unitaire = ?, quantite_stock = ? "
+                   + "WHERE id_produit = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setLong(1, produit.getId_utilisateur());
+            ps.setString(2, produit.getNom_produit());
+            ps.setString(3, produit.getDescription());
+            ps.setInt(4, produit.getPrix_unitaire());
+            ps.setInt(5, produit.getQuantite_stock());
+            ps.setLong(6, produit.getId_produit());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }
