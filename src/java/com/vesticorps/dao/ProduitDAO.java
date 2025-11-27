@@ -147,6 +147,22 @@ public class ProduitDAO {
             return false;
         }
     }
+    
+    /* 
+        Pour supprimer un produit
+    */
+    public boolean deleteProduit(long idProduit) {
 
+        String sql = "DELETE FROM produit WHERE id_produit = ?";
 
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setLong(1, idProduit);
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

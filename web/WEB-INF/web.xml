@@ -87,4 +87,14 @@
         <url-pattern>/vendeur/produit/modifier</url-pattern>
     </servlet-mapping>
     
+   <!-- Servlet pour supprimer un produit --> 
+   <servlet>
+        <servlet-name>SupprimerProduitServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.vendeur.SupprimerProduitServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SupprimerProduitServlet</servlet-name>
+        <url-pattern>/vendeur/produit/supprimer</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
