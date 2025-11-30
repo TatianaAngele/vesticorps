@@ -165,4 +165,40 @@ public class ProduitDAO {
             return false;
         }
     }
+    
+    /*
+        Récuperer tous les produits
+    */
+    public List<Produit> getAllProduits() {
+
+        List<Produit> liste = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM produit";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Produit p = new Produit();
+                p.setId_produit(rs.getLong("id_produit"));
+                p.setId_utilisateur(rs.getLong("id_utilisateur"));
+                p.setNom_produit(rs.getString("nom_produit"));
+                p.setPhoto(rs.getString("photo"));
+                p.setDescription(rs.getString("description"));
+                p.setPrix_unitaire(rs.getInt("prix_unitaire"));
+                p.setQuantite_stock(rs.getInt("quantite_stock"));
+
+                liste.add(p);
+            }
+
+            rs.close();
+            ps.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return liste;
+    }
 }

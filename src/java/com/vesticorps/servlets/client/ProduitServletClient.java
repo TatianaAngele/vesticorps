@@ -1,6 +1,10 @@
 package com.vesticorps.servlets.client;
 
+import com.vesticorps.beans.Produit;
+import com.vesticorps.dao.ProduitDAO;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +20,12 @@ public class ProduitServletClient extends HttpServlet {
             response.sendRedirect("/vesticorps/auth");
             return;
         }
+        
+        List<Produit> produits = new ArrayList<Produit>(); 
+        ProduitDAO produitDAO = new ProduitDAO(); 
+        produits = produitDAO.getAllProduits();
+        
+        request.setAttribute("produits", produits);
         
         this.getServletContext().getRequestDispatcher("/WEB-INF/client/produit.jsp").forward(request, response);
     } 
