@@ -16,7 +16,7 @@
 
             <div>
                 <ul class="flex space-x-[16px]">
-                    <li><a href="${pageContext.request.contextPath}/client/produits"> <i class="fa fa-store"></i> Produits</a></li>
+                    <li><a href="${pageContext.request.contextPath}/client/produit"> <i class="fa fa-store"></i> Produits</a></li>
                     <li><a href="${pageContext.request.contextPath}/client/panier"> <i class="fa fa-cart-shopping"></i> Panier</a></li>
                     <li><a href="${pageContext.request.contextPath}/client/commandes"> <i class="fa fa-box"></i> Commandes</a></li>
                     <li>
