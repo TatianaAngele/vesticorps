@@ -80,7 +80,7 @@
                             </p>
                         </div>
 
-                        <!-- Bouton suppression future -->
+                        <!-- Bouton suppression -->
                         <a href="${pageContext.request.contextPath}/client/panier/supprimer?id_produit=${produit.id_produit}"
                            class="text-red-600 text-xl">
                             <i class="fa fa-trash"></i>

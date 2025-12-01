@@ -107,7 +107,7 @@
         <url-pattern>/client/panier/ajouter</url-pattern>
     </servlet-mapping>
     
-    <!-- Servlet pour voir les produits dans le panier du client --> 
+   <!-- Servlet pour voir les produits dans le panier du client --> 
    <servlet>
         <servlet-name>PanierServlet</servlet-name>
         <servlet-class>com.vesticorps.servlets.client.PanierServlet</servlet-class>
@@ -115,5 +115,15 @@
     <servlet-mapping>
         <servlet-name>PanierServlet</servlet-name>
         <url-pattern>/client/panier</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servlet pour supprimer un produit dans le panier -->
+    <servlet>
+        <servlet-name>SupprimerDuPanierServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.client.SupprimerDuPanierServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SupprimerDuPanierServlet</servlet-name>
+        <url-pattern>/client/panier/supprimer</url-pattern>
     </servlet-mapping>
 </web-app>
