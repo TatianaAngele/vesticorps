@@ -136,4 +136,15 @@
         <servlet-name>ValiderCommandeServlet</servlet-name>
         <url-pattern>/client/commande/valider</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet permettant au client de voir sa liste de commande --> 
+    <servlet>
+        <servlet-name>CommandesServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.client.CommandesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommandesServlet</servlet-name>
+        <url-pattern>/client/commandes</url-pattern>
+    </servlet-mapping>
+    
 </web-app>

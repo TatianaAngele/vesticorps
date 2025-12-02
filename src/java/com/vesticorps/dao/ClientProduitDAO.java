@@ -2,10 +2,12 @@ package com.vesticorps.dao;
 
 import com.vesticorps.bdd.BaseDeDonnees;
 import com.vesticorps.beans.ClientProduit;
+import com.vesticorps.beans.Produit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientProduitDAO {
@@ -111,5 +113,53 @@ public class ClientProduitDAO {
             if (psStockCheck != null) psStockCheck.close();
             if (psUpdateStock != null) psUpdateStock.close();
         }
+    }
+    
+    /* 
+        Récuperer tous les commandes d'un client
+    */
+    public List<ClientProduit> getCommandesByClient(long idClient) throws SQLException {
+        final String SQL_SELECT_BY_CLIENT =
+            "SELECT cp.id_produit, cp.date_commande, cp.quantite_commande, "
+          + "p.nom_produit, p.prix_unitaire, p.photo "
+          + "FROM client_produit cp "
+          + "JOIN produit p ON cp.id_produit = p.id_produit "
+          + "WHERE cp.id_utilisateur = ? "
+          + "ORDER BY cp.date_commande DESC";
+        
+        List<ClientProduit> commandes = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = connection.prepareStatement(SQL_SELECT_BY_CLIENT);
+            ps.setInt(1, (int) idClient);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                ClientProduit cp = new ClientProduit();
+                cp.setId_utilisateur((int) idClient);
+                cp.setId_produit(rs.getInt("id_produit"));
+                cp.setDate_commande(rs.getString("date_commande"));
+                cp.setQuantite_commande(rs.getInt("quantite_commande"));
+
+                // Création de l'objet Produit
+                Produit p = new Produit();
+                p.setId_produit(rs.getInt("id_produit"));
+                p.setNom_produit(rs.getString("nom_produit"));
+                p.setPrix_unitaire(rs.getInt("prix_unitaire"));
+                p.setPhoto(rs.getString("photo"));
+
+                cp.setProduit(p); 
+
+                commandes.add(cp);
+            }
+
+        } catch (SQLException e) {
+            throw e;
+        }
+
+        return commandes;
     }
 }

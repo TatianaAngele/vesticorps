@@ -3,8 +3,9 @@ package com.vesticorps.beans;
 public class ClientProduit {
     private long id_utilisateur; 
     private long id_produit; 
-    private long date_commande; 
+    private String date_commande; 
     private long quantite_commande; 
+    private Produit produit;
     
     public ClientProduit() {} 
 
@@ -24,11 +25,11 @@ public class ClientProduit {
         this.id_produit = id_produit;
     }
 
-    public long getDate_commande() {
+    public String getDate_commande() {
         return date_commande;
     }
 
-    public void setDate_commande(long date_commande) {
+    public void setDate_commande(String date_commande) {
         this.date_commande = date_commande;
     }
 
@@ -38,5 +39,13 @@ public class ClientProduit {
 
     public void setQuantite_commande(long quantite_commande) {
         this.quantite_commande = quantite_commande;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
     }
 }
