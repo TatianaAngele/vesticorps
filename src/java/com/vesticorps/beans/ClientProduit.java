@@ -5,6 +5,7 @@ public class ClientProduit {
     private long id_produit; 
     private String date_commande; 
     private long quantite_commande; 
+    private Utilisateur utilisateur;
     private Produit produit;
     
     public ClientProduit() {} 
@@ -48,4 +49,14 @@ public class ClientProduit {
     public void setProduit(Produit produit) {
         this.produit = produit;
     }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+    
+    
 }

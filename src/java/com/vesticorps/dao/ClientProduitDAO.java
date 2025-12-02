@@ -162,4 +162,71 @@ public class ClientProduitDAO {
 
         return commandes;
     }
+    
+    /**
+    * Récupère toutes les commandes reçues par un vendeur
+    * (c'est-à-dire toutes les commandes sur SES produits)
+    * avec les informations du client.
+    */
+   public List<ClientProduit> getCommandesByVendeur(long idVendeur) {
+
+       final String SQL =
+           "SELECT cp.id_utilisateur AS id_client, cp.id_produit, cp.date_commande, cp.quantite_commande, " +
+           "       p.nom_produit, p.prix_unitaire, p.photo, " +
+           "       u.nom, u.prenom, u.email, u.telephone, u.adresse " +
+           "FROM client_produit cp " +
+           "JOIN produit p ON cp.id_produit = p.id_produit " +
+           "JOIN utilisateur u ON cp.id_utilisateur = u.id_utilisateur " +
+           "WHERE p.id_utilisateur = ? " +
+           "ORDER BY cp.date_commande DESC";
+
+       List<ClientProduit> commandes = new ArrayList<>();
+       PreparedStatement ps = null;
+       ResultSet rs = null;
+
+       try {
+           ps = connection.prepareStatement(SQL);
+           ps.setLong(1, idVendeur);
+
+           rs = ps.executeQuery();
+
+           while (rs.next()) {
+
+               ClientProduit cp = new ClientProduit();
+               cp.setId_utilisateur(rs.getLong("id_client")); // id du client
+               cp.setId_produit(rs.getLong("id_produit"));
+               cp.setDate_commande(rs.getString("date_commande"));
+               cp.setQuantite_commande(rs.getInt("quantite_commande"));
+
+               // Produit commandé
+               Produit p = new Produit();
+               p.setId_produit(rs.getLong("id_produit"));
+               p.setNom_produit(rs.getString("nom_produit"));
+               p.setPrix_unitaire(rs.getInt("prix_unitaire"));
+               p.setPhoto(rs.getString("photo"));
+
+               cp.setProduit(p);
+
+               // Infos du client (objet générique Utilisateur)
+               com.vesticorps.beans.Utilisateur client = new com.vesticorps.beans.Utilisateur();
+               client.setId_utilisateur(rs.getLong("id_client"));
+               client.setNom(rs.getString("nom"));
+               client.setPrenom(rs.getString("prenom"));
+               client.setEmail(rs.getString("email"));
+               client.setTelephone(rs.getString("telephone"));
+               client.setAdresse(rs.getString("adresse"));
+
+               cp.setUtilisateur(client); // nécessite un setter dans ClientProduit
+
+               commandes.add(cp);
+           }
+
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+       
+
+       return commandes;
+   }
+
 }

@@ -147,4 +147,13 @@
         <url-pattern>/client/commandes</url-pattern>
     </servlet-mapping>
     
+   <!-- Servlet permettant au vendeur de lister les commandes --> 
+   <servlet>
+        <servlet-name>CommandesVendeurServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.vendeur.CommandesVendeurServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CommandesVendeurServlet</servlet-name>
+        <url-pattern>/vendeur/commandes</url-pattern>
+    </servlet-mapping>
 </web-app>
