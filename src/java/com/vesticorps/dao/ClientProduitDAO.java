@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ClientProduitDAO {
@@ -228,5 +229,44 @@ public class ClientProduitDAO {
 
        return commandes;
    }
+   
+   /* 
+       (Statistique) Récupère le total d'une commande par jour pour un vendeur
+   */
+    public HashMap<String, String> getStatByVendeur(long idVendeur) {
 
+        final String SQL =
+            "SELECT DATE(cp.date_commande) AS date_commande, " +
+            "       SUM(cp.quantite_commande * p.prix_unitaire) AS total_jour " +
+            "FROM client_produit cp " +
+            "JOIN produit p ON cp.id_produit = p.id_produit " +
+            "WHERE p.id_utilisateur = ? " +
+            "GROUP BY DATE(cp.date_commande) " +
+            "ORDER BY DATE(cp.date_commande) ASC";
+
+        HashMap<String, String> stat = new HashMap<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            ps = connection.prepareStatement(SQL);
+            ps.setLong(1, idVendeur);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String date = rs.getString("date_commande");
+                String total = rs.getString("total_jour");
+                stat.put(date, total);  // clé = date, valeur = total
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try { if (rs != null) rs.close(); } catch (Exception ignored) {}
+            try { if (ps != null) ps.close(); } catch (Exception ignored) {}
+        }
+
+        return stat;
+    }
 }

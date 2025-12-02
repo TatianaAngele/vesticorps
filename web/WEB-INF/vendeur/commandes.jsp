@@ -12,11 +12,11 @@
     <body>
         <header class="w-full flex justify-between p-4 bg-[#bce354]">
             <div>
-                <a href="${pageContext.request.contextPath}/">
+                
                     <h1 class="font-black">
                         <i class="fa-solid fa-shirt"></i> VESTICORPS
                     </h1>
-                </a>
+                
             </div>
 
             <div>

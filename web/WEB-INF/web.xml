@@ -156,4 +156,14 @@
         <servlet-name>CommandesVendeurServlet</servlet-name>
         <url-pattern>/vendeur/commandes</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet permettant au vendeur de voir la statistique des ventes -->
+    <servlet>
+        <servlet-name>StatistiqueServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.vendeur.StatistiqueServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StatistiqueServlet</servlet-name>
+        <url-pattern>/vendeur/statistique</url-pattern>
+    </servlet-mapping>
 </web-app>
