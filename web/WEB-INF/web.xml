@@ -126,4 +126,14 @@
         <servlet-name>SupprimerDuPanierServlet</servlet-name>
         <url-pattern>/client/panier/supprimer</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet permettant au client de valider une commande -->
+    <servlet>
+        <servlet-name>ValiderCommandeServlet</servlet-name>
+        <servlet-class>com.vesticorps.servlets.client.ValiderCommandeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ValiderCommandeServlet</servlet-name>
+        <url-pattern>/client/commande/valider</url-pattern>
+    </servlet-mapping>
 </web-app>
